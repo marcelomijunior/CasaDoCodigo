@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CasaDoCodigo.Models
 {
     [DataContract]
-    public class ItemPedido : BaseModel
+    public class ItemPedido : BaseRepository
     {
         [Required]
         [DataMember]

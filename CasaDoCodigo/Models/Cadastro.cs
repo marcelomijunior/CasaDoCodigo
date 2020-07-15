@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CasaDoCodigo.Models
 {
-    public class Cadastro : BaseModel
+    public class Cadastro : BaseRepository
     {
         public Cadastro()
         {

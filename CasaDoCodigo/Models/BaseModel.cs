@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CasaDoCodigo.Models
 {
     [DataContract]
-    public abstract class BaseModel
+    public abstract class BaseRepository
     {
         [DataMember]
         public int Id { get; set; }
