@@ -1,7 +1,9 @@
-﻿using CasaDoCodigo.Models;
+﻿using CasaDoCodigo.Areas.Identity.Data;
+using CasaDoCodigo.Models;
 using CasaDoCodigo.Models.ViewsModel;
 using CasaDoCodigo.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -16,26 +18,28 @@ namespace CasaDoCodigo.Repository
         private readonly IHttpContextAccessor contextAccessor;
         private readonly IHttpHelper httpHelper;
         private readonly ICadastroRepository cadastroRepository;
+        private readonly UserManager<AppIdentityUser> userManager;
 
         public PedidoRepository(
             IConfiguration configuration,
             ApplicationContext contexto,
             IHttpContextAccessor contextAccessor,
             IHttpHelper sessionHelper,
-            ICadastroRepository cadastroRepository
+            ICadastroRepository cadastroRepository,
+            UserManager<AppIdentityUser> userManager
             ) : base(configuration, contexto)
         {
             this.contextAccessor = contextAccessor;
             this.httpHelper = sessionHelper;
             this.cadastroRepository = cadastroRepository;
+            this.userManager = userManager;
         }
 
         public async Task AddItemAsync(string codigo)
         {
-            var produto = await
-                            contexto.Set<Produto>()
-                            .Where(p => p.Codigo == codigo)
-                            .SingleOrDefaultAsync();
+            var produto = await contexto.Set<Produto>()
+                .Where(p => p.Codigo == codigo)
+                .SingleOrDefaultAsync();
 
             if (produto == null)
             {
@@ -44,18 +48,15 @@ namespace CasaDoCodigo.Repository
 
             var pedido = await GetPedidoAsync();
 
-            var itemPedido = await
-                                contexto.Set<ItemPedido>()
-                                .Where(i => i.Produto.Codigo == codigo
-                                        && i.Pedido.Id == pedido.Id)
-                                .SingleOrDefaultAsync();
+            var itemPedido = await contexto.Set<ItemPedido>()
+                .Where(i => i.Produto.Codigo == codigo && i.Pedido.Id == pedido.Id)
+                .SingleOrDefaultAsync();
 
             if (itemPedido == null)
             {
                 itemPedido = new ItemPedido(pedido, produto, 1, produto.Preco);
-                await
-                    contexto.Set<ItemPedido>()
-                    .AddAsync(itemPedido);
+
+                await contexto.Set<ItemPedido>().AddAsync(itemPedido);
 
                 await contexto.SaveChangesAsync();
             }
@@ -64,20 +65,23 @@ namespace CasaDoCodigo.Repository
         public async Task<Pedido> GetPedidoAsync()
         {
             var pedidoId = httpHelper.GetPedidoId();
-            var pedido =
-                await dbSet
+            var pedido = await dbSet
                 .Include(p => p.Itens)
-                    .ThenInclude(i => i.Produto)
-                        .ThenInclude(prod => prod.Categoria)
+                .ThenInclude(i => i.Produto)
+                .ThenInclude(prod => prod.Categoria)
                 .Include(p => p.Cadastro)
                 .Where(p => p.Id == pedidoId)
                 .SingleOrDefaultAsync();
 
             if (pedido == null)
             {
-                pedido = new Pedido(httpHelper.GetCadastro());
+                var clienteId = userManager.GetUserId(contextAccessor.HttpContext.User);
+
+                pedido = new Pedido(clienteId);
+
                 await dbSet.AddAsync(pedido);
                 await contexto.SaveChangesAsync();
+
                 httpHelper.SetPedidoId(pedido.Id);
             }
 
@@ -111,24 +115,25 @@ namespace CasaDoCodigo.Repository
         public async Task<Pedido> UpdateCadastroAsync(Cadastro cadastro)
         {
             var pedido = await GetPedidoAsync();
+
             await cadastroRepository.UpdateAsync(pedido.Cadastro.Id, cadastro);
+
             httpHelper.ResetPedidoId();
             httpHelper.SetCadastro(pedido.Cadastro);
+
             return pedido;
         }
 
         private async Task<ItemPedido> GetItemPedidoAsync(int itemPedidoId)
         {
-            return
-            await contexto.Set<ItemPedido>()
+            return await contexto.Set<ItemPedido>()
                 .Where(ip => ip.Id == itemPedidoId)
                 .SingleOrDefaultAsync();
         }
 
         private async Task RemoveItemPedidoAsync(int itemPedidoId)
         {
-            contexto.Set<ItemPedido>()
-                .Remove(await GetItemPedidoAsync(itemPedidoId));
+            contexto.Set<ItemPedido>().Remove(await GetItemPedidoAsync(itemPedidoId));
         }
     }
 }
