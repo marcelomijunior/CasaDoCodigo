@@ -9,13 +9,15 @@ namespace CasaDoCodigo.Models
 {
     public class Pedido : BaseRepository
     {
-        public Pedido()
+        public Pedido(string clienteId)
         {
+            ClienteId = clienteId;
             Cadastro = new Cadastro();
         }
 
-        public Pedido(Cadastro cadastro)
+        public Pedido(string clienteId, Cadastro cadastro)
         {
+            ClienteId = clienteId;
             Cadastro = cadastro;
         }
 

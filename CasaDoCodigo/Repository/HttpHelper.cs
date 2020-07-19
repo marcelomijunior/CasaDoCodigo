@@ -1,50 +1,65 @@
-﻿using CasaDoCodigo.Models;
+﻿using CasaDoCodigo.Areas.Identity.Data;
+using CasaDoCodigo.Models;
 using CasaDoCodigo.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CasaDoCodigo.Repository
 {
     public class HttpHelper : IHttpHelper
     {
         private readonly IHttpContextAccessor contextAccessor;
+        private readonly UserManager<AppIdentityUser> userManager;
+
         public IConfiguration Configuration { get; }
 
-        public HttpHelper(IHttpContextAccessor contextAccessor, IConfiguration configuration)
+        public HttpHelper(
+            IHttpContextAccessor contextAccessor,
+            IConfiguration configuration,
+            UserManager<AppIdentityUser> userManager
+            )
         {
             this.contextAccessor = contextAccessor;
             Configuration = configuration;
+            this.userManager = userManager;
+        }
+        private string GetClienteId()
+        {
+            var claimsPrincipal = contextAccessor.HttpContext.User;
+            var clienteId = userManager.GetUserId(claimsPrincipal);
+
+            return clienteId;
         }
 
         public int? GetPedidoId()
         {
-            return contextAccessor.HttpContext.Session.GetInt32("pedidoId");
+            return contextAccessor.HttpContext.Session.GetInt32($"pedidoId_{GetClienteId()}");
         }
+
 
         public void SetPedidoId(int pedidoId)
         {
-            contextAccessor.HttpContext.Session.SetInt32("pedidoId", pedidoId);
+            contextAccessor.HttpContext.Session.SetInt32($"pedidoId_{GetClienteId()}", pedidoId);
         }
 
         public void ResetPedidoId()
         {
-            contextAccessor.HttpContext.Session.Remove("pedidoId");
+            contextAccessor.HttpContext.Session.Remove($"pedidoId_{GetClienteId()}");
         }
 
         public void SetCadastro(Cadastro cadastro)
         {
             string json = JsonConvert.SerializeObject(cadastro.GetClone());
+
             contextAccessor.HttpContext.Session.SetString("cadastro", json);
         }
 
         public Cadastro GetCadastro()
         {
             string json = contextAccessor.HttpContext.Session.GetString("cadastro");
+
             if (string.IsNullOrWhiteSpace(json))
                 return new Cadastro();
 
