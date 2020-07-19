@@ -28,7 +28,6 @@ namespace CasaDoCodigo.Models
         [Required(ErrorMessage = "Endereco é obrigatório")]
         [DataMember]
         public string Endereco { get; set; } = "";
-        [Required(ErrorMessage = "Complemento é obrigatório")]
         [DataMember]
         public string Complemento { get; set; } = "";
         [Required(ErrorMessage = "Bairro é obrigatório")]
