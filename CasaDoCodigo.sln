@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CasaDoCodigoMVC", "CasaDoCodigo\CasaDoCodigoMVC.csproj", "{A66B4C49-281D-4C94-B536-4CF44FACEEA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CasaDoCodigoMVC", "CasaDoCodigoMVC\CasaDoCodigoMVC.csproj", "{9B6FA8A9-68E8-4B7A-B1F1-10195A9380FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A66B4C49-281D-4C94-B536-4CF44FACEEA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A66B4C49-281D-4C94-B536-4CF44FACEEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A66B4C49-281D-4C94-B536-4CF44FACEEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A66B4C49-281D-4C94-B536-4CF44FACEEA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B6FA8A9-68E8-4B7A-B1F1-10195A9380FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B6FA8A9-68E8-4B7A-B1F1-10195A9380FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B6FA8A9-68E8-4B7A-B1F1-10195A9380FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B6FA8A9-68E8-4B7A-B1F1-10195A9380FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7A278AE0-C45E-4223-B094-6809DDD1B7C3}
+		SolutionGuid = {597BBE1D-AF1C-4587-AEDB-1EA2295B415B}
 	EndGlobalSection
 EndGlobal
