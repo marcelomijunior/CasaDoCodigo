@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using CasaDoCodigo.Repository;
 using CasaDoCodigo.Repository.Interfaces;
+using CasaDoCodigoMVC;
+using CasaDoCodigoMVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -49,6 +51,7 @@ namespace CasaDoCodigo
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddTransient<ICadastroRepository, CadastroRepository>();
+            services.AddTransient<IRelatorioHelper, RelatorioHelper>();
 
             services.AddAuthentication().AddMicrosoftAccount(options => 
             {

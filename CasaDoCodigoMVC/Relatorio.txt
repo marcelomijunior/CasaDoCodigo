@@ -32,3 +32,26 @@ Itens:
     Subtotal: R$ 299,40
 =============================================
 
+=============================================
+No. Pedido: 01003
+Cliente: 
+    Nome: Marcelo de Miranda Junior
+    Endereco: Rua Marley Moura Abreu, 242  Conj Ernesto do Nascimento Belo Horizonte MG
+    Fone: (31) 9 9179-1048
+    Email: marcelomijunior@gmail.com
+    Total: R$ 99,80
+Itens:
+
+    Código: 068
+    Preco Unitário: R$ 49,90
+    Descrição: Programa��o funcional em .NET: Explore um novo universo
+    Quantidade: 001
+    Subtotal: R$ 49,90
+
+    Código: 039
+    Preco Unitário: R$ 49,90
+    Descrição: Desenvolvimento web com ASP.NET MVC
+    Quantidade: 001
+    Subtotal: R$ 49,90
+=============================================
+
