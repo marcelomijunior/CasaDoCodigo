@@ -1,8 +1,11 @@
 ﻿using CasaDoCodigo.Models;
 using CasaDoCodigoMVC.Repository.Interfaces;
+using System;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace CasaDoCodigoMVC
 {
@@ -10,15 +13,24 @@ namespace CasaDoCodigoMVC
     {
         public async Task GerarRelatorio(Pedido pedido)
         {
-            string linhaRelatorio = await GetLinhaRelatorio(pedido);
-            await System.IO.File.AppendAllLinesAsync("Relatorio.txt", new string[] { linhaRelatorio });
+            string textoRealtorio = await GetTextoRelatorio(pedido);
+            //await System.IO.File.AppendAllLinesAsync("Relatorio.txt", new string[] { linhaRelatorio });
+            
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(textoRealtorio);
+                HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                Uri uri = new Uri("http://localhost:5011/api/relatorio");
+
+                await httpClient.PostAsync(uri, httpContent);
+            }
         }
 
-        private async Task<string> GetLinhaRelatorio(Pedido pedido)
+        private async Task<string> GetTextoRelatorio(Pedido pedido)
         {
             StringBuilder sb = new StringBuilder();
-            string templatePedido = await System.IO.File.ReadAllTextAsync("TemplatePedido.txt");
 
+            string templatePedido = await System.IO.File.ReadAllTextAsync("TemplatePedido.txt");
             string templateItemPedido = await System.IO.File.ReadAllTextAsync("TemplateItemPedido.txt");
 
             string linhaPedido = string.Format(
