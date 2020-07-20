@@ -53,16 +53,18 @@ namespace CasaDoCodigo
             services.AddTransient<ICadastroRepository, CadastroRepository>();
             services.AddTransient<IRelatorioHelper, RelatorioHelper>();
 
-            services.AddAuthentication().AddMicrosoftAccount(options => 
-            {
-                options.ClientId = Configuration["ExternalLogin:Microsoft:ClientId"];
-                options.ClientSecret = Configuration["ExternalLogin:Microsoft:ClientSecret"];
-            });
-            services.AddAuthentication().AddGoogle(options =>
-            {
-                options.ClientId = Configuration["ExternalLogin:Google:ClientId"];
-                options.ClientSecret = Configuration["ExternalLogin:Google:ClientSecret"];
-            });
+            services.AddHttpClient<IRelatorioHelper, RelatorioHelper>();
+
+            services.AddAuthentication()
+                .AddMicrosoftAccount(options =>
+                {
+                    options.ClientId = Configuration["ExternalLogin:Microsoft:ClientId"];
+                    options.ClientSecret = Configuration["ExternalLogin:Microsoft:ClientSecret"];
+                }).AddGoogle(options =>
+                {
+                    options.ClientId = Configuration["ExternalLogin:Google:ClientId"];
+                    options.ClientSecret = Configuration["ExternalLogin:Google:ClientSecret"];
+                });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,

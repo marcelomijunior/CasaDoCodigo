@@ -14,10 +14,12 @@ namespace CasaDoCodigoMVC
     {
         private const string RELATIVEURI = "/api/relatorio";
         private readonly IConfiguration configuration;
+        private readonly HttpClient httpClient;
 
-        public RelatorioHelper(IConfiguration configuration)
+        public RelatorioHelper(IConfiguration configuration, HttpClient httpClient)
         {
             this.configuration = configuration;
+            this.httpClient = httpClient;
         }
 
         public async Task GerarRelatorio(Pedido pedido)
@@ -25,21 +27,22 @@ namespace CasaDoCodigoMVC
             string textoRealtorio = await GetTextoRelatorio(pedido);
             //await System.IO.File.AppendAllLinesAsync("Relatorio.txt", new string[] { linhaRelatorio });
 
-            using (HttpClient httpClient = new HttpClient())
+            //using (HttpClient httpClient = new HttpClient())
+            //using (HttpClient httpClient = HttpClientFactory.Create())
+            //{
+            var json = JsonConvert.SerializeObject(textoRealtorio);
+            HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            Uri baseUri = new Uri(configuration["ApiRelatorioUrl"]);
+            Uri uri = new Uri(baseUri, RELATIVEURI);
+
+            HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(uri, httpContent);
+
+            if (!httpResponseMessage.IsSuccessStatusCode)
             {
-                var json = JsonConvert.SerializeObject(textoRealtorio);
-                HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-                Uri baseUri = new Uri(configuration["ApiRelatorioUrl"]);
-                Uri uri = new Uri(baseUri, RELATIVEURI);
-
-                HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(uri, httpContent);
-
-                if (!httpResponseMessage.IsSuccessStatusCode)
-                {
-                    throw new ApplicationException(httpResponseMessage.ReasonPhrase);
-                }
+                throw new ApplicationException(httpResponseMessage.ReasonPhrase);
             }
+            //}
         }
 
         private async Task<string> GetTextoRelatorio(Pedido pedido)
