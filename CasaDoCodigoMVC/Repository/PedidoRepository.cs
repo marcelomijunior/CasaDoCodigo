@@ -2,6 +2,7 @@
 using CasaDoCodigo.Models;
 using CasaDoCodigo.Models.ViewsModel;
 using CasaDoCodigo.Repository.Interfaces;
+using CasaDoCodigoMVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace CasaDoCodigo.Repository
         private readonly IHttpHelper httpHelper;
         private readonly ICadastroRepository cadastroRepository;
         private readonly UserManager<AppIdentityUser> userManager;
+        private readonly IRelatorioHelper relatorioHelper;
 
         public PedidoRepository(
             IConfiguration configuration,
@@ -26,13 +28,15 @@ namespace CasaDoCodigo.Repository
             IHttpContextAccessor contextAccessor,
             IHttpHelper sessionHelper,
             ICadastroRepository cadastroRepository,
-            UserManager<AppIdentityUser> userManager
+            UserManager<AppIdentityUser> userManager,
+            IRelatorioHelper relatorioHelper
             ) : base(configuration, contexto)
         {
             this.contextAccessor = contextAccessor;
             this.httpHelper = sessionHelper;
             this.cadastroRepository = cadastroRepository;
             this.userManager = userManager;
+            this.relatorioHelper = relatorioHelper;
         }
 
         public async Task AddItemAsync(string codigo)
@@ -120,6 +124,8 @@ namespace CasaDoCodigo.Repository
 
             httpHelper.ResetPedidoId();
             httpHelper.SetCadastro(pedido.Cadastro);
+
+            await relatorioHelper.GerarRelatorio(pedido);
 
             return pedido;
         }
