@@ -14,7 +14,7 @@ namespace CasaDoCodigo.RelatorioWebAPI.Controllers
     [ApiController]
     public class RelatorioController : ControllerBase
     {
-        private readonly List<string> Relatorio = new List<string>() 
+        private static readonly List<string> Relatorio = new List<string>() 
         {
             "Primeiro Pedido",
             "Segundo Pedido"
