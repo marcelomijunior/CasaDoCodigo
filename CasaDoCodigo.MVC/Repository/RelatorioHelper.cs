@@ -6,23 +6,39 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace CasaDoCodigoMVC
 {
     public class RelatorioHelper : IRelatorioHelper
     {
+        private const string RELATIVEURI = "/api/relatorio";
+        private readonly IConfiguration configuration;
+
+        public RelatorioHelper(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         public async Task GerarRelatorio(Pedido pedido)
         {
             string textoRealtorio = await GetTextoRelatorio(pedido);
             //await System.IO.File.AppendAllLinesAsync("Relatorio.txt", new string[] { linhaRelatorio });
-            
+
             using (HttpClient httpClient = new HttpClient())
             {
                 var json = JsonConvert.SerializeObject(textoRealtorio);
                 HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                Uri uri = new Uri("http://localhost:5011/api/relatorio");
 
-                await httpClient.PostAsync(uri, httpContent);
+                Uri baseUri = new Uri(configuration["ApiRelatorioUrl"]);
+                Uri uri = new Uri(baseUri, RELATIVEURI);
+
+                HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(uri, httpContent);
+
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    throw new ApplicationException(httpResponseMessage.ReasonPhrase);
+                }
             }
         }
 
