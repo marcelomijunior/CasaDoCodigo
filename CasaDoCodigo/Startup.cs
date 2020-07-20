@@ -49,11 +49,19 @@ namespace CasaDoCodigo
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddTransient<ICadastroRepository, CadastroRepository>();
+
+            services.AddAuthentication().AddMicrosoftAccount(options => 
+            {
+                options.ClientId = Configuration["ExternalLogin:Microsoft:ClientId"];
+                options.ClientSecret = Configuration["ExternalLogin:Microsoft:ClientSecret"];
+            });
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = Configuration["ExternalLogin:Google:ClientId"];
+                options.ClientSecret = Configuration["ExternalLogin:Google:ClientSecret"];
+            });
         }
 
-
-        // Este método é chamado pelo runtime.
-        // Use este método para configurar o pipeline de requisições HTTP.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,
             IServiceProvider serviceProvider)
         {
