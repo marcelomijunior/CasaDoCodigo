@@ -10,19 +10,21 @@
 
 @if (!string.IsNullOrWhiteSpace(nomeUsuario))
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a title="Manage">Olá, @nomeUsuario !</a>
-        </li>
-        <li>
-            <button class="btn btn-link navbar-btn navbar-link">Sair</button>
-        </li>
-    </ul>
+    <form asp-controller="Conta" asp-action="Logout" method="post">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a title="Manage">Olá, @nomeUsuario !</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Sair</button>
+            </li>
+        </ul>
+    </form>
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
         <li><a>Cadastre-se</a></li>
-        <li><a>Entrar</a></li>
+        <li><a asp-controller="Conta" asp-action="Login">Entrar</a></li>
     </ul>
 }
