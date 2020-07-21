@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,15 +56,34 @@ namespace CasaDoCodigo
 
             services.AddHttpClient<IRelatorioHelper, RelatorioHelper>();
 
-            services.AddAuthentication()
-                .AddMicrosoftAccount(options =>
+            //services.AddAuthentication()
+            //    .AddMicrosoftAccount(options =>
+            //    {
+            //        options.ClientId = Configuration["ExternalLogin:Microsoft:ClientId"];
+            //        options.ClientSecret = Configuration["ExternalLogin:Microsoft:ClientSecret"];
+            //    }).AddGoogle(options =>
+            //    {
+            //        options.ClientId = Configuration["ExternalLogin:Google:ClientId"];
+            //        options.ClientSecret = Configuration["ExternalLogin:Google:ClientSecret"];
+            //    });
+
+            services.AddAuthentication(options =>
+            {
+                // forma de autenticação local
+                options.DefaultScheme = "Cookies";
+                // protocolo que define o fluxo da autenticação
+                options.DefaultChallengeScheme = "OpenIdConnect";
+            })
+                .AddCookie()
+                .AddOpenIdConnect(options =>
                 {
-                    options.ClientId = Configuration["ExternalLogin:Microsoft:ClientId"];
-                    options.ClientSecret = Configuration["ExternalLogin:Microsoft:ClientSecret"];
-                }).AddGoogle(options =>
-                {
-                    options.ClientId = Configuration["ExternalLogin:Google:ClientId"];
-                    options.ClientSecret = Configuration["ExternalLogin:Google:ClientSecret"];
+                    options.SignInScheme = "Cookies";
+                    options.Authority = "http://localhost:4090/";
+                    options.ClientId = "CasaDoCodigo.MVC";
+                    options.ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A";
+                    options.SaveTokens = true;
+                    options.ResponseType = "code id_token";
+                    options.RequireHttpsMetadata = false;
                 });
         }
 
