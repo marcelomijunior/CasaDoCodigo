@@ -78,9 +78,9 @@ namespace CasaDoCodigo
                 .AddOpenIdConnect(options =>
                 {
                     options.SignInScheme = "Cookies";
-                    options.Authority = "http://localhost:4090/";
+                    options.Authority = Configuration["IdentityServer4Url"];
                     options.ClientId = "CasaDoCodigo.MVC";
-                    options.ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A";
+                    options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
                     options.SaveTokens = true;
                     options.ResponseType = "code id_token";
                     options.RequireHttpsMetadata = false;

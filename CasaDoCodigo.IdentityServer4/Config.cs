@@ -3,6 +3,8 @@
 
 
 using IdentityServer4.Models;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 
 namespace CasaDoCodigo.IdentityServer4
@@ -23,14 +25,17 @@ namespace CasaDoCodigo.IdentityServer4
                 new ApiScope("scope2"),
             };
 
-        public static IEnumerable<Client> Clients =>
-            new Client[]
+        public static IEnumerable<Client> GetClients(IConfiguration configuration)
+        {
+            string casaDoCodigoMvcUrl = configuration["CasaDoCodigoMvcUrl"];
+
+            return new Client[]
             {
                 // m2m client credentials flow client
                 new Client
                 {
-                    ClientId = "CasaDoCodigo.MVC",
-                    ClientName = "Casa do Código MVC",
+                    ClientId = "Client",
+                    ClientName = "Client Credentials Name",
 
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
@@ -41,18 +46,20 @@ namespace CasaDoCodigo.IdentityServer4
                 // interactive client using code flow + pkce
                 new Client
                 {
-                    ClientId = "interactive",
+                    ClientId = "CasaDoCodigo.MVC",
+                    ClientName = "Casa do Código MVC",
                     ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RedirectUris = { "https://localhost:44300/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
+                    RedirectUris = { $"{casaDoCodigoMvcUrl}/signin-oidc" },
+                    FrontChannelLogoutUri = $"{casaDoCodigoMvcUrl}/signout-oidc",
+                    PostLogoutRedirectUris = { $"{casaDoCodigoMvcUrl}/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "scope2" }
                 },
             };
+        }
     }
 }
