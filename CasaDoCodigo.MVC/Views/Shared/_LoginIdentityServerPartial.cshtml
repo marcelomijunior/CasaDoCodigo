@@ -10,16 +10,14 @@
 
 @if (!string.IsNullOrWhiteSpace(nomeUsuario))
 {
-    <form id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a title="Manage">Olá, @nomeUsuario!</a>
-            </li>
-            <li>
-                <button class="btn btn-link navbar-btn navbar-link">Sair</button>
-            </li>
-        </ul>
-    </form>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a title="Manage">Olá, @nomeUsuario !</a>
+        </li>
+        <li>
+            <button class="btn btn-link navbar-btn navbar-link">Sair</button>
+        </li>
+    </ul>
 }
 else
 {
