@@ -79,7 +79,9 @@ namespace CasaDoCodigo.Repository
 
             if (pedido == null)
             {
-                var clienteId = userManager.GetUserId(contextAccessor.HttpContext.User);
+                //var clienteId = userManager.GetUserId(contextAccessor.HttpContext.User);
+                var claimsPrincipal = contextAccessor.HttpContext.User;
+                var clienteId = claimsPrincipal.FindFirst("sub")?.Value;
 
                 pedido = new Pedido(clienteId);
 

@@ -1,5 +1,6 @@
 ﻿@{
-    string nomeUsuario = "";
+    string nomeUsuario = User.FindFirst("name")?.Value;
+    var claims = User.Claims.ToList();
 }
 
 @*

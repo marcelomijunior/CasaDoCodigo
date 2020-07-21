@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
 using CasaDoCodigo.Repository;
 using CasaDoCodigo.Repository.Interfaces;
 using CasaDoCodigoMVC;
@@ -67,6 +65,8 @@ namespace CasaDoCodigo
             //        options.ClientSecret = Configuration["ExternalLogin:Google:ClientSecret"];
             //    });
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             services.AddAuthentication(options =>
             {
                 // forma de autenticação local
@@ -84,6 +84,7 @@ namespace CasaDoCodigo
                     options.SaveTokens = true;
                     options.ResponseType = "code id_token";
                     options.RequireHttpsMetadata = false;
+                    options.GetClaimsFromUserInfoEndpoint = true;
                 });
         }
 
