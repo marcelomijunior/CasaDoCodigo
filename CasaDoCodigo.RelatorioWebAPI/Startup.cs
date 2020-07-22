@@ -29,7 +29,7 @@ namespace CasaDoCodigo.RelatorioWebAPI
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.ApiName = "RelatorioWebApi";
+                    options.ApiName = "CasaDoCodigo.RelatorioWebApi";
                     options.ApiSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
                     options.Authority = Configuration["IdentityServer4Url"];
                     options.RequireHttpsMetadata = false;

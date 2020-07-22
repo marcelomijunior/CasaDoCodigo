@@ -21,7 +21,8 @@ namespace CasaDoCodigo.IdentityServer4
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
-                new ApiScope("RelatorioWebApi"),
+                new ApiScope("ApiScope1"),
+                new ApiScope("CasaDoCodigo.RelatorioWebApi")
             };
 
         public static IEnumerable<Client> GetClients(IConfiguration configuration)
@@ -49,14 +50,14 @@ namespace CasaDoCodigo.IdentityServer4
                     ClientName = "Casa do Código MVC",
                     ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
 
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
 
                     RedirectUris = { $"{casaDoCodigoMvcUrl}/signin-oidc" },
                     FrontChannelLogoutUri = $"{casaDoCodigoMvcUrl}/signout-oidc",
                     PostLogoutRedirectUris = { $"{casaDoCodigoMvcUrl}/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "RelatorioWebApi" }
+                    AllowedScopes = { "openid", "profile", "CasaDoCodigo.RelatorioWebApi" }
                 },
             };
         }

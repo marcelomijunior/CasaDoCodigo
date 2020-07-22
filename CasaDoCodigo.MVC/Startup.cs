@@ -78,11 +78,12 @@ namespace CasaDoCodigo
                     options.Authority = Configuration["IdentityServer4Url"];
                     options.ClientId = "CasaDoCodigo.MVC";
                     options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
+                    options.Scope.Add("openid");
+                    options.Scope.Add("profile");
                     options.SaveTokens = true;
                     options.ResponseType = "code id_token";
                     options.RequireHttpsMetadata = false;
                     options.GetClaimsFromUserInfoEndpoint = true;
-                    options.Scope.Add("email");
                 });
         }
 
