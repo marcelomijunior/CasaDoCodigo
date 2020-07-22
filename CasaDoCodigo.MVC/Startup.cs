@@ -82,6 +82,7 @@ namespace CasaDoCodigo
                     options.ResponseType = "code id_token";
                     options.RequireHttpsMetadata = false;
                     options.GetClaimsFromUserInfoEndpoint = true;
+                    options.Scope.Add("email");
                 });
         }
 
