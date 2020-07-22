@@ -49,7 +49,7 @@ namespace CasaDoCodigo.IdentityServer4
             })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddInMemoryClients(Config.GetClients(Configuration))
+                .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
 
             // not recommended for production - you need to store your key material somewhere secure

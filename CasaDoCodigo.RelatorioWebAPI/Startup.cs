@@ -31,7 +31,7 @@ namespace CasaDoCodigo.RelatorioWebAPI
                 {
                     options.ApiName = "CasaDoCodigo.RelatorioWebApi";
                     options.ApiSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
-                    options.Authority = Configuration["IdentityServer4Url"];
+                    options.Authority = Configuration["CasaDoCodigo.IdentityServer4Url"];
                     options.RequireHttpsMetadata = false;
                 });
         }
