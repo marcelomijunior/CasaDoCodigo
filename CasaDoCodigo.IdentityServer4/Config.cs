@@ -21,8 +21,7 @@ namespace CasaDoCodigo.IdentityServer4
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
-                new ApiScope("scope1"),
-                new ApiScope("scope2"),
+                new ApiScope("RelatorioWebApi"),
             };
 
         public static IEnumerable<Client> GetClients(IConfiguration configuration)
@@ -57,7 +56,7 @@ namespace CasaDoCodigo.IdentityServer4
                     PostLogoutRedirectUris = { $"{casaDoCodigoMvcUrl}/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "scope2" }
+                    AllowedScopes = { "openid", "profile", "RelatorioWebApi" }
                 },
             };
         }
