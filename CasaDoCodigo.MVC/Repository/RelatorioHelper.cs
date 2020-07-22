@@ -7,9 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
-using IdentityModel.Client;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
-using System.Diagnostics;
 
 namespace CasaDoCodigoMVC
 {
@@ -35,30 +32,6 @@ namespace CasaDoCodigoMVC
             //{
             var json = JsonConvert.SerializeObject(textoRealtorio);
             HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var discoveryResponse = await httpClient.GetDiscoveryDocumentAsync(configuration["IdentityServer4Url"]);
-
-            if (discoveryResponse.IsError)
-            {
-                throw new ApplicationException(discoveryResponse.Error);
-            }
-
-            var tokenResponse = await httpClient.RequestClientCredentialsTokenAsync(
-                new ClientCredentialsTokenRequest()
-                {
-                    Address = discoveryResponse.TokenEndpoint,
-                    ClientId = "CasaDoCodigo.MVC",
-                    ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0",
-                    Scope = "CasaDoCodigo.RelatorioWebApi"
-                });
-
-            if (tokenResponse.IsError)
-            {
-                Debug.WriteLine(tokenResponse.Error);
-                return;
-            }
-
-            httpClient.SetBearerToken(tokenResponse.AccessToken);
 
             Uri baseUri = new Uri(configuration["ApiRelatorioUrl"]);
             Uri uri = new Uri(baseUri, RELATIVEURI);
