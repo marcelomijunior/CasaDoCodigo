@@ -51,13 +51,15 @@ namespace CasaDoCodigo.IdentityServer4
                     ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
+                    RequirePkce = true,
 
                     RedirectUris = { $"{casaDoCodigoMvcUrl}/signin-oidc" },
                     FrontChannelLogoutUri = $"{casaDoCodigoMvcUrl}/signout-oidc",
                     PostLogoutRedirectUris = { $"{casaDoCodigoMvcUrl}/signout-callback-oidc" },
 
+                    AllowedScopes = { "openid", "profile", "email", "CasaDoCodigo.RelatorioWebApi" },
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "CasaDoCodigo.RelatorioWebApi" }
+                    RefreshTokenUsage = TokenUsage.ReUse
                 },
             };
         }
