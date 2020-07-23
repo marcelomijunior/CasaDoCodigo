@@ -19,7 +19,7 @@ namespace CasaDoCodigo.MVC.Controllers
             // atualizar cookies (autenticacao local)
             await HttpContext.SignOutAsync("Cookies");
             // desconexão identity server
-            await HttpContext.SignOutAsync("OpenIdConnect");
+            await HttpContext.SignOutAsync("oidc");
         }
     }
 }

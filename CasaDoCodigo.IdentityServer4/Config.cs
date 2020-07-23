@@ -10,11 +10,11 @@ namespace CasaDoCodigo.IdentityServer4
     public static class Config
     {
         public static IEnumerable<IdentityResource> IdentityResources =>
-                   new IdentityResource[]
-                   {
+            new IdentityResource[]
+            {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                   };
+            };
 
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
@@ -45,11 +45,11 @@ namespace CasaDoCodigo.IdentityServer4
                     ClientName = "Casa Do Codigo",
                     ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
 
-                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+                    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
 
-                    RedirectUris = { "https://localhost:5001/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:5001/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:5001/signout-callback-oidc" },
+                    RedirectUris = { "http://localhost:5001/signin-oidc" },
+                    FrontChannelLogoutUri = "http://localhost:5001/signout-oidc",
+                    PostLogoutRedirectUris = { "http://localhost:5001/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "email", "CasaDoCodigo.RelatorioWebApi" }
