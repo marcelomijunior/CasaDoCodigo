@@ -2,7 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServer4;
 using IdentityServer4.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
 namespace CasaDoCodigo.IdentityServer4
@@ -57,7 +59,12 @@ namespace CasaDoCodigo.IdentityServer4
                     PostLogoutRedirectUris = { "http://localhost:5001/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "email", "CasaDoCodigo.RelatorioApi" }
+                    AllowedScopes = {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "CasaDoCodigo.RelatorioApi"
+                    }
                 },
 
                 // SPA client using code flow + pkce
