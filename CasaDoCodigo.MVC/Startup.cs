@@ -71,9 +71,10 @@ namespace CasaDoCodigo
                 // protocolo que define o fluxo da autenticação
                 options.DefaultChallengeScheme = "oidc";
             })
-                .AddCookie("Cookies")
+                .AddCookie()
                 .AddOpenIdConnect("oidc", options =>
                 {
+                    options.SignInScheme = "Cookies";
                     options.Authority = Configuration["CasaDoCodigo.IdentityServer4Url"];
                     options.RequireHttpsMetadata = false;
 
@@ -101,9 +102,11 @@ namespace CasaDoCodigo
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
             app.UseAuthentication();
+
+            app.UseStaticFiles();
             app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
