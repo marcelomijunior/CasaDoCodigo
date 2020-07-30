@@ -33,22 +33,6 @@ namespace CasaDoCodigo.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Carrinho(string codigo)
-        {
-            if (!string.IsNullOrEmpty(codigo))
-            {
-                await pedidoRepository.AddItemAsync(codigo);
-            }
-
-            var pedido = await pedidoRepository.GetPedidoAsync();
-
-            List<ItemPedido> itens = pedido.Itens;
-            CarrinhoViewModel carrinhoViewModel = new CarrinhoViewModel(itens);
-
-            return base.View(carrinhoViewModel);
-        }
-
-        [Authorize]
         public async Task<IActionResult> Cadastro()
         {
             var pedido = await pedidoRepository.GetPedidoAsync();
@@ -100,14 +84,6 @@ namespace CasaDoCodigo.Controllers
             }
 
             return RedirectToAction("Cadastro");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<UpdateQuantidadeResponse> UpdateQuantidade([FromBody] ItemPedido itemPedido)
-        {
-            return await pedidoRepository.UpdateQuantidadeAsync(itemPedido);
         }
     }
 }

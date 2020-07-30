@@ -1,11 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Carrinho";
 }
-@model CasaDoCodigo.Models.ViewsModel.CarrinhoViewModel;
+@model CarrinhoViewModel;
 
 <h3>Meu Carrinho</h3>
 
-<form method="post" asp-action="Carrinho">
+<form method="post" asp-area="Carrinho" asp-controller="Home" asp-action="Index">
 </form>
 
 <div class="row">
