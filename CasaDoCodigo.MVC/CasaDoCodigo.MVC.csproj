@@ -33,4 +33,10 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\Catalogo\Data\" />
+    <Folder Include="Areas\Catalogo\Models\" />
+  </ItemGroup>
+
 </Project>

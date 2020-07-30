@@ -109,9 +109,14 @@ namespace CasaDoCodigo
 
             app.UseMvc(routes =>
             {
+                routes.MapAreaRoute(
+                    name: "AreaCatalogo",
+                    areaName: "Catalogo",
+                    template: "Catalogo/{controller=Home}/{action=Index}/{pesquisa?}");
+
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Pedido}/{action=BuscaProdutos}/{codigo?}");
+                    template: "{controller=Home}/{action=Index}");
             });
 
             var dataService = serviceProvider.GetRequiredService<IDataService>();
