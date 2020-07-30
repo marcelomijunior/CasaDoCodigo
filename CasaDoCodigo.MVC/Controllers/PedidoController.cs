@@ -15,7 +15,6 @@ namespace CasaDoCodigo.Controllers
         private readonly IProdutoRepository produtoRepository;
         private readonly IPedidoRepository pedidoRepository;
         private readonly UserManager<AppIdentityUser> userManager;
-
         public PedidoController(
             IProdutoRepository produtoRepository,
             IPedidoRepository pedidoRepository,
@@ -32,18 +31,32 @@ namespace CasaDoCodigo.Controllers
             return View(await produtoRepository.GetProdutosAsync());
         }
 
+        public async Task<IActionResult> BuscaProdutos(string pesquisa)
+        {
+            return View(await produtoRepository.GetProdutosAsync(pesquisa));
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Carrinho(string codigo)
+        {
+            if (!string.IsNullOrEmpty(codigo))
+            {
+                await pedidoRepository.AddItemAsync(codigo);
+            }
+            var pedido = await pedidoRepository.GetPedidoAsync();
+            List<ItemPedido> itens = pedido.Itens;
+            CarrinhoViewModel carrinhoViewModel = new CarrinhoViewModel(itens);
+            return base.View(carrinhoViewModel);
+        }
         [Authorize]
         public async Task<IActionResult> Cadastro()
         {
             var pedido = await pedidoRepository.GetPedidoAsync();
-
             if (pedido == null)
             {
                 return RedirectToAction("Carrossel");
             }
-
             //var usuario = await userManager.GetUserAsync(User);
-
             //pedido.Cadastro.Nome = usuario.Nome;
             //pedido.Cadastro.Email = usuario.Email;
             //pedido.Cadastro.Telefone = usuario.Telefone;
@@ -53,12 +66,9 @@ namespace CasaDoCodigo.Controllers
             //pedido.Cadastro.Municipio = usuario.Municipio;
             //pedido.Cadastro.UF = usuario.UF;
             //pedido.Cadastro.CEP = usuario.CEP;
-
             pedido.Cadastro.Nome = User.FindFirst("name")?.Value;
-
             return View(pedido.Cadastro);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -67,7 +77,6 @@ namespace CasaDoCodigo.Controllers
             if (ModelState.IsValid)
             {
                 //var usuario = await userManager.GetUserAsync(User);
-
                 //usuario.Nome = cadastro.Nome;
                 //usuario.Email = cadastro.Email;
                 //usuario.Telefone = cadastro.Telefone;
@@ -77,13 +86,17 @@ namespace CasaDoCodigo.Controllers
                 //usuario.Municipio = cadastro.Municipio;
                 //usuario.UF = cadastro.UF;
                 //usuario.CEP = cadastro.CEP;
-
                 //await userManager.UpdateAsync(usuario);
-
                 return View(await pedidoRepository.UpdateCadastroAsync(cadastro));
             }
-
             return RedirectToAction("Cadastro");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<UpdateQuantidadeResponse> UpdateQuantidade([FromBody] ItemPedido itemPedido)
+        {
+            return await pedidoRepository.UpdateQuantidadeAsync(itemPedido);
         }
     }
 }

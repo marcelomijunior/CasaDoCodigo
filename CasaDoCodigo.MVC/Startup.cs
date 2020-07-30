@@ -120,6 +120,11 @@ namespace CasaDoCodigo
                     template: "Carrinho/{controller=Home}/{action=Index}/{codigo?}");
 
                 routes.MapAreaRoute(
+                    name: "AreaCadastro",
+                    areaName: "Cadastro",
+                    template: "Cadastro/{controller=Home}/{action=Index}");
+
+                routes.MapAreaRoute(
                     name: "AreaPedido",
                     areaName: "Pedido",
                     template: "Pedido/{controller=Home}/{action=Index}");
