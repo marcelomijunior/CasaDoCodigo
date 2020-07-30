@@ -79,7 +79,8 @@ namespace CasaDoCodigo.Repository
             if (pedido == null)
             {
                 var claimsPrincipal = contextAccessor.HttpContext.User;
-                var clienteId = claimsPrincipal.FindFirst("sub")?.Value;
+                //var clienteId = claimsPrincipal.FindFirst("sub")?.Value;
+                var clienteId = userManager.GetUserId(claimsPrincipal);
 
                 pedido = new Pedido(clienteId);
 
@@ -123,9 +124,8 @@ namespace CasaDoCodigo.Repository
             await cadastroRepository.UpdateAsync(pedido.Cadastro.Id, cadastro);
 
             httpHelper.ResetPedidoId();
-            httpHelper.SetCadastro(pedido.Cadastro);
 
-            await relatorioHelper.GerarRelatorio(pedido);
+            //await relatorioHelper.GerarRelatorio(pedido);
 
             return pedido;
         }
