@@ -7,9 +7,27 @@ using System.Threading.Tasks;
 namespace CasaDoCodigo.Models
 {
     [DataContract]
-    public abstract class BaseRepository
+    public class BaseModel
     {
         [DataMember]
         public int Id { get; set; }
+
+        public int CompareTo(object obj)
+        {
+            if (!(obj is BaseModel outro)) return 1;
+
+            return Id.CompareTo(outro.Id);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BaseModel model &&
+                   Id == model.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
     }
 }

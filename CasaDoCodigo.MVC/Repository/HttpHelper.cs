@@ -25,6 +25,7 @@ namespace CasaDoCodigo.Repository
             Configuration = configuration;
             this.userManager = userManager;
         }
+
         private string GetClienteId()
         {
             var claimsPrincipal = contextAccessor.HttpContext.User;

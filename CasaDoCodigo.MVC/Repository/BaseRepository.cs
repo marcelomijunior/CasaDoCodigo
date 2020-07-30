@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CasaDoCodigo.Repository
 {
-    public class BaseRepository<T> where T : BaseRepository
+    public class BaseRepository<T> where T : BaseModel
     {
         protected readonly IConfiguration configuration;
         protected readonly ApplicationContext contexto;

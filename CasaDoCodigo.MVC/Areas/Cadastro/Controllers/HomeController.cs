@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CasaDoCodigo.MVC.Areas.Cadastro.Controllers
+namespace CasaDoCodigo.Areas.Cadastro.Controllers
 {
     [Area("Cadastro")]
     public class HomeController : Controller
@@ -23,7 +23,7 @@ namespace CasaDoCodigo.MVC.Areas.Cadastro.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Cadastro()
+        public async Task<IActionResult> Index()
         {
             var pedido = await pedidoRepository.GetPedidoAsync();
 

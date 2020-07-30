@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CasaDoCodigo.Areas.Identity.Data;
-using CasaDoCodigo.Models;
 using CasaDoCodigo.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CasaDoCodigo.MVC.Areas.Pedido.Controllers
+namespace CasaDoCodigo.Areas.Pedido.Controllers
 {
     [Area("Pedido")]
     public class HomeController : Controller
@@ -26,7 +25,7 @@ namespace CasaDoCodigo.MVC.Areas.Pedido.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Resumo(Cadastro cadastro)
+        public async Task<IActionResult> Index(Models.Cadastro cadastro)
         {
             if (ModelState.IsValid)
             {

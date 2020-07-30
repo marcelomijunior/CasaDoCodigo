@@ -8,7 +8,7 @@ using CasaDoCodigo.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CasaDoCodigo.MVC.Areas.Carrinho.Controllers
+namespace CasaDoCodigo.Areas.Carrinho.Controllers
 {
     [Area("Carrinho")]
     public class HomeController : Controller

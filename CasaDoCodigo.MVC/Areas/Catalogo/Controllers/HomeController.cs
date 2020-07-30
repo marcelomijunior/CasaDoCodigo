@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CasaDoCodigo.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CasaDoCodigo.MVC.Areas.Catalogo.Controllers
+namespace CasaDoCodigo.Areas.Catalogo.Controllers
 {
     [Area("Catalogo")]
     public class HomeController : Controller

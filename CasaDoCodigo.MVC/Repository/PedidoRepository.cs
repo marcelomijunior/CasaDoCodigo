@@ -2,7 +2,6 @@
 using CasaDoCodigo.Models;
 using CasaDoCodigo.Models.ViewsModel;
 using CasaDoCodigo.Repository.Interfaces;
-using CasaDoCodigoMVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -79,7 +78,6 @@ namespace CasaDoCodigo.Repository
 
             if (pedido == null)
             {
-                //var clienteId = userManager.GetUserId(contextAccessor.HttpContext.User);
                 var claimsPrincipal = contextAccessor.HttpContext.User;
                 var clienteId = claimsPrincipal.FindFirst("sub")?.Value;
 
@@ -115,7 +113,7 @@ namespace CasaDoCodigo.Repository
                 return new UpdateQuantidadeResponse(itemPedidoDB, carrinhoViewModel);
             }
 
-            throw new ArgumentException("ItemPedido não encontrado");
+            throw new ArgumentException("Item Pedido não encontrado");
         }
 
         public async Task<Pedido> UpdateCadastroAsync(Cadastro cadastro)

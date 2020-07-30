@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CasaDoCodigo.Models
 {
-    public class Produto : BaseRepository
+    public class Produto : BaseModel
     {
         public Produto()
         {

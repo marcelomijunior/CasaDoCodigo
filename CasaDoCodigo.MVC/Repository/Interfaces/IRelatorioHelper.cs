@@ -1,7 +1,7 @@
 ﻿using CasaDoCodigo.Models;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigoMVC.Repository.Interfaces
+namespace CasaDoCodigo.Repository.Interfaces
 {
     public interface IRelatorioHelper
     {

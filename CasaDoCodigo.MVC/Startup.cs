@@ -2,8 +2,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using CasaDoCodigo.Repository;
 using CasaDoCodigo.Repository.Interfaces;
-using CasaDoCodigoMVC;
-using CasaDoCodigoMVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

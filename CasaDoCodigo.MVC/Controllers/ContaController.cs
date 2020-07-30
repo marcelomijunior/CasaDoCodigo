@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CasaDoCodigo.MVC.Controllers
+namespace CasaDoCodigo.Controllers
 {
     public class ContaController : Controller
     {
