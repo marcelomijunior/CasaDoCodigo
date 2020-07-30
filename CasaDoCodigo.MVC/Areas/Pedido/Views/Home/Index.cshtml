@@ -1,5 +1,9 @@
-﻿
+﻿@{ 
+    ViewData["Title"] = "Resumo";
+}
+
 @model Pedido;
+
 <h3>Resumo do Pedido</h3>
 
 <div class="row">
@@ -64,7 +68,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            <a class="btn btn-success" asp-area="Catalogo">
+            <a class="btn btn-success" href="/">
                 Voltar ao Catálogo
             </a>
         </div>

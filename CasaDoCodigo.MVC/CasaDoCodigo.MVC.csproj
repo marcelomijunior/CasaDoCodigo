@@ -42,6 +42,8 @@
     <Folder Include="Areas\Carrinho\Models\" />
     <Folder Include="Areas\Catalogo\Data\" />
     <Folder Include="Areas\Catalogo\Models\" />
+    <Folder Include="Areas\Pedido\Data\" />
+    <Folder Include="Areas\Pedido\Models\" />
   </ItemGroup>
 
 </Project>

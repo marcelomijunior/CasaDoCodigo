@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CasaDoCodigo.MVC.Areas.Carrinho.Controllers
 {
+    [Area("Carrinho")]
     public class HomeController : Controller
     {
         private readonly IPedidoRepository pedidoRepository;
@@ -20,7 +21,7 @@ namespace CasaDoCodigo.MVC.Areas.Carrinho.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Carrinho(string codigo)
+        public async Task<IActionResult> Index(string codigo)
         {
             if (!string.IsNullOrEmpty(codigo))
             {

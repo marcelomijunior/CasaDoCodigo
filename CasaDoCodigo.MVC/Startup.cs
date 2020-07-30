@@ -51,40 +51,40 @@ namespace CasaDoCodigo
 
             services.AddHttpClient<IRelatorioHelper, RelatorioHelper>();
 
-            //services.AddAuthentication()
-            //    .AddMicrosoftAccount(options =>
-            //    {
-            //        options.ClientId = Configuration["ExternalLogin:Microsoft:ClientId"];
-            //        options.ClientSecret = Configuration["ExternalLogin:Microsoft:ClientSecret"];
-            //    }).AddGoogle(options =>
-            //    {
-            //        options.ClientId = Configuration["ExternalLogin:Google:ClientId"];
-            //        options.ClientSecret = Configuration["ExternalLogin:Google:ClientSecret"];
-            //    });
-
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
-            services.AddAuthentication(options =>
-            {
-                // forma de autenticação local
-                options.DefaultScheme = "Cookies";
-                // protocolo que define o fluxo da autenticação
-                options.DefaultChallengeScheme = "oidc";
-            })
-                .AddCookie()
-                .AddOpenIdConnect("oidc", options =>
+            services.AddAuthentication()
+                .AddMicrosoftAccount(options =>
                 {
-                    options.SignInScheme = "Cookies";
-                    options.Authority = Configuration["CasaDoCodigo.IdentityServer4Url"];
-                    options.RequireHttpsMetadata = false;
-
-                    options.ClientId = "CasaDoCodigo.MVC";
-                    options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
-                    options.ResponseType = "code id_token";
-
-                    options.SaveTokens = true;
-                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.ClientId = Configuration["externallogin:microsoft:clientid"];
+                    options.ClientSecret = Configuration["externallogin:microsoft:clientsecret"];
+                }).AddGoogle(options =>
+                {
+                    options.ClientId = Configuration["externallogin:google:clientid"];
+                    options.ClientSecret = Configuration["externallogin:google:clientsecret"];
                 });
+
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            //services.AddAuthentication(options =>
+            //{
+            //    // forma de autenticação local
+            //    options.DefaultScheme = "Cookies";
+            //    // protocolo que define o fluxo da autenticação
+            //    options.DefaultChallengeScheme = "oidc";
+            //})
+            //    .AddCookie()
+            //    .AddOpenIdConnect("oidc", options =>
+            //    {
+            //        options.SignInScheme = "Cookies";
+            //        options.Authority = Configuration["CasaDoCodigo.IdentityServer4Url"];
+            //        options.RequireHttpsMetadata = false;
+
+            //        options.ClientId = "CasaDoCodigo.MVC";
+            //        options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
+            //        options.ResponseType = "code id_token";
+
+            //        options.SaveTokens = true;
+            //        options.GetClaimsFromUserInfoEndpoint = true;
+            //    });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,
@@ -117,8 +117,12 @@ namespace CasaDoCodigo
                 routes.MapAreaRoute(
                     name: "AreaCarrinho",
                     areaName: "Carrinho",
-                    template: "Carrinho/{controller=Home}/{action=Index}/{codigo?}"
-                    );
+                    template: "Carrinho/{controller=Home}/{action=Index}/{codigo?}");
+
+                routes.MapAreaRoute(
+                    name: "AreaPedido",
+                    areaName: "Pedido",
+                    template: "Pedido/{controller=Home}/{action=Index}");
 
                 routes.MapRoute(
                     name: "default",
