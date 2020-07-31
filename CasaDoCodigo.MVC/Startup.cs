@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
-using CasaDoCodigo.Repository;
-using CasaDoCodigo.Repository.Interfaces;
+using CasaDoCodigo.MVC.Repository;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace CasaDoCodigo
+namespace CasaDoCodigo.MVC
 {
     public class Startup
     {

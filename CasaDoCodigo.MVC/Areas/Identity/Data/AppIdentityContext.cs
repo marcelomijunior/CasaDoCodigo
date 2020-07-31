@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CasaDoCodigo.Areas.Identity.Data;
+using CasaDoCodigo.MVC.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CasaDoCodigo.Data
+namespace CasaDoCodigo.MVC.Data
 {
     public class AppIdentityContext : IdentityDbContext<AppIdentityUser>
     {

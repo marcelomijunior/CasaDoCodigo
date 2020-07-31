@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CasaDoCodigo.Migrations.sqliteMigrations
+namespace CasaDoCodigo.MVC.Migrations.sqliteMigrations
 {
     public partial class UsuarioCustomizadoIdentity : Migration
     {

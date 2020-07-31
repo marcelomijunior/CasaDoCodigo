@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CasaDoCodigo.Areas.Identity.Data;
-using CasaDoCodigo.Repository.Interfaces;
+using CasaDoCodigo.MVC.Areas.Identity.Data;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CasaDoCodigo.Areas.Cadastro.Controllers
+namespace CasaDoCodigo.MVC.Areas.Cadastro.Controllers
 {
     [Area("Cadastro")]
     public class HomeController : Controller

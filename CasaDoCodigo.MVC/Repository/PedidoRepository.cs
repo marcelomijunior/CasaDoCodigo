@@ -1,7 +1,7 @@
-﻿using CasaDoCodigo.Areas.Identity.Data;
-using CasaDoCodigo.Models;
-using CasaDoCodigo.Models.ViewsModel;
-using CasaDoCodigo.Repository.Interfaces;
+﻿using CasaDoCodigo.MVC.Areas.Identity.Data;
+using CasaDoCodigo.MVC.Models;
+using CasaDoCodigo.MVC.Models.ViewsModel;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.Repository
+namespace CasaDoCodigo.MVC.Repository
 {
     public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository
     {

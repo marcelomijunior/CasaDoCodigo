@@ -1,4 +1,4 @@
-﻿using CasaDoCodigo.Models;
+﻿using CasaDoCodigo.MVC.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.Repository
+namespace CasaDoCodigo.MVC.Repository
 {
     public class BaseRepository<T> where T : BaseModel
     {

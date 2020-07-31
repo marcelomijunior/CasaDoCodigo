@@ -1,11 +1,11 @@
-﻿using CasaDoCodigo.Models;
-using CasaDoCodigo.Models.ViewsModel;
+﻿using CasaDoCodigo.MVC.Models;
+using CasaDoCodigo.MVC.Models.ViewsModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.Repository.Interfaces
+namespace CasaDoCodigo.MVC.Repository.Interfaces
 {
     public interface IProdutoRepository
     {

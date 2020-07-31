@@ -1,10 +1,10 @@
-﻿using CasaDoCodigo.Models;
+﻿using CasaDoCodigo.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.Repository.Interfaces
+namespace CasaDoCodigo.MVC.Repository.Interfaces
 {
     public interface IPedidoRepository
     {

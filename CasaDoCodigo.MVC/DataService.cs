@@ -1,6 +1,6 @@
-﻿using CasaDoCodigo.Models;
-using CasaDoCodigo.Repository;
-using CasaDoCodigo.Repository.Interfaces;
+﻿using CasaDoCodigo.MVC.Models;
+using CasaDoCodigo.MVC.Repository;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo
+namespace CasaDoCodigo.MVC
 {
     public class DataService : IDataService
     {

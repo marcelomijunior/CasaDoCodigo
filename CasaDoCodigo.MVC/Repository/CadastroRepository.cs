@@ -1,12 +1,12 @@
-﻿using CasaDoCodigo.Models;
-using CasaDoCodigo.Repository.Interfaces;
+﻿using CasaDoCodigo.MVC.Models;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.Repository
+namespace CasaDoCodigo.MVC.Repository
 {
     public class CadastroRepository : BaseRepository<Cadastro>, ICadastroRepository
     {

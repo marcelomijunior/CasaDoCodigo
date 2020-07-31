@@ -1,5 +1,5 @@
-﻿using CasaDoCodigo.Models;
-using CasaDoCodigo.Repository.Interfaces;
+﻿using CasaDoCodigo.MVC.Models;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -11,7 +11,7 @@ using IdentityModel.Client;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using System.Diagnostics;
 
-namespace CasaDoCodigo.Repository
+namespace CasaDoCodigo.MVC.Repository
 {
     public class RelatorioHelper : IRelatorioHelper
     {

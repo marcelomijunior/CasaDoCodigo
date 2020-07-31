@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CasaDoCodigo.Migrations.SqliteMigrations
+namespace CasaDoCodigo.MVC.Migrations.SqliteMigrations
 {
     public partial class Identity : Migration
     {

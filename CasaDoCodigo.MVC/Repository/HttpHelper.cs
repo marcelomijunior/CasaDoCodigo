@@ -1,12 +1,12 @@
-﻿using CasaDoCodigo.Areas.Identity.Data;
-using CasaDoCodigo.Models;
-using CasaDoCodigo.Repository.Interfaces;
+﻿using CasaDoCodigo.MVC.Areas.Identity.Data;
+using CasaDoCodigo.MVC.Models;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
-namespace CasaDoCodigo.Repository
+namespace CasaDoCodigo.MVC.Repository
 {
     public class HttpHelper : IHttpHelper
     {

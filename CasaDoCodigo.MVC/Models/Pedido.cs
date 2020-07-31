@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.Models
+namespace CasaDoCodigo.MVC.Models
 {
     public class Pedido : BaseModel
     {

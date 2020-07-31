@@ -1,6 +1,6 @@
-﻿using CasaDoCodigo.Models;
-using CasaDoCodigo.Models.ViewsModel;
-using CasaDoCodigo.Repository.Interfaces;
+﻿using CasaDoCodigo.MVC.Models;
+using CasaDoCodigo.MVC.Models.ViewsModel;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.Repository
+namespace CasaDoCodigo.MVC.Repository
 {
     public class ProdutoRepository : BaseRepository<Produto>, IProdutoRepository
     {

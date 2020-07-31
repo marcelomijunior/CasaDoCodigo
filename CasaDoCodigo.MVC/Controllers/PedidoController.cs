@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CasaDoCodigo.Areas.Identity.Data;
-using CasaDoCodigo.Models;
-using CasaDoCodigo.Models.ViewsModel;
-using CasaDoCodigo.Repository.Interfaces;
+using CasaDoCodigo.MVC.Areas.Identity.Data;
+using CasaDoCodigo.MVC.Models;
+using CasaDoCodigo.MVC.Models.ViewsModel;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CasaDoCodigo.Controllers
+namespace CasaDoCodigo.MVC.Controllers
 {
     public class PedidoController : Controller
     {

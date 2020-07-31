@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CasaDoCodigo.Migrations.SqlServerMigrations
+namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
 {
     public partial class InitialCreateDB : Migration
     {

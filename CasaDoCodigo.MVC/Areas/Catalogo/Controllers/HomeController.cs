@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CasaDoCodigo.Repository.Interfaces;
+using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CasaDoCodigo.Areas.Catalogo.Controllers
+namespace CasaDoCodigo.MVC.Areas.Catalogo.Controllers
 {
     [Area("Catalogo")]
     public class HomeController : Controller
