@@ -23,7 +23,7 @@ namespace CasaDoCodigo.Repository
                 .ToListAsync();
         }
 
-        public async Task<BuscaProdutosViewModel> GetProdutosAsync(string pesquisa)
+        public async Task<CatalogoViewModel> GetProdutosAsync(string pesquisa)
         {
             IQueryable<Produto> query = dbSet;
 
@@ -35,7 +35,7 @@ namespace CasaDoCodigo.Repository
             query = query
                 .Include(prod => prod.Categoria);
 
-            return new BuscaProdutosViewModel(await query.ToListAsync(), pesquisa);
+            return new CatalogoViewModel(await query.ToListAsync(), pesquisa);
         }
 
         //MELHORIA: 1) Métodos assíncronos

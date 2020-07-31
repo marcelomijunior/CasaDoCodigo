@@ -11,6 +11,6 @@ namespace CasaDoCodigo.Repository.Interfaces
     {
         Task SaveProdutosAsync(List<Livro> livros);
         Task<IList<Produto>> GetProdutosAsync();
-        Task<BuscaProdutosViewModel> GetProdutosAsync(string pesquisa);
+        Task<CatalogoViewModel> GetProdutosAsync(string pesquisa);
     }
 }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace CasaDoCodigo.Models.ViewsModel
 {
-    public class BuscaProdutosViewModel
+    public class CatalogoViewModel
     {
-        public BuscaProdutosViewModel(IList<Produto> produtos, string pesquisa)
+        public CatalogoViewModel(IList<Produto> produtos, string pesquisa)
         {
             Produtos = produtos;
             Pesquisa = pesquisa;
