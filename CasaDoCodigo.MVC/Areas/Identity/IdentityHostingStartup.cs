@@ -1,6 +1,6 @@
 ﻿using System;
-using CasaDoCodigo.Areas.Identity.Data;
-using CasaDoCodigo.Data;
+using CasaDoCodigo.MVC.Areas.Identity.Data;
+using CasaDoCodigo.MVC.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(CasaDoCodigo.Areas.Identity.IdentityHostingStartup))]
-namespace CasaDoCodigo.Areas.Identity
+[assembly: HostingStartup(typeof(CasaDoCodigo.MVC.Areas.Identity.IdentityHostingStartup))]
+namespace CasaDoCodigo.MVC.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
