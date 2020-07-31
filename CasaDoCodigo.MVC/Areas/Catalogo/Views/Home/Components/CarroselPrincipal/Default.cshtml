@@ -1,0 +1,21 @@
+﻿@addTagHelper *, CasaDoCodigo.MVC
+@using CasaDoCodigo.Areas.Catalogo.Models.ViewModels
+@model CarroselPrincipalViewModel
+@{
+    var categoria = Model.Categoria;
+}
+
+<h3>@categoria</h3>
+
+<div id="my-carousel-@Model.Categoria.Id" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        @for (int pagina = 0; pagina < Model.NumeroDePaginas; pagina++)
+        {
+            <vc:carrosel-principal indice="@pagina" produtos="@Model.Produtos" tamanho-pagina="@Model.TamanhoDaPagina" />
+        }
+    </div>
+</div>
+
+<!-- Controls -->
+<partial name="_NavegacaoProdutos" />
