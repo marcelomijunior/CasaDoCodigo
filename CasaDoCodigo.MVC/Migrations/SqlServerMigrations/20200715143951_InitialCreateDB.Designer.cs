@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CasaDoCodigo.Migrations.SqlServerMigrations
+namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
 {
     [DbContext(typeof(ApplicationContext))]
     [Migration("20200715143951_InitialCreateDB")]
