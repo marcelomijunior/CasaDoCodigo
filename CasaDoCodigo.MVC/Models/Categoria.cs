@@ -8,8 +8,6 @@ namespace CasaDoCodigo.MVC.Models
 {
     public class Categoria : BaseModel
     {
-        public Categoria() { }
-
         public Categoria(string nome)
         {
             Nome = nome;

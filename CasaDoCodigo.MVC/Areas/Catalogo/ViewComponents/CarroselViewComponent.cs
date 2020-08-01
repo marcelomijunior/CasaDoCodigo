@@ -10,11 +10,11 @@ namespace CasaDoCodigo.MVC.Areas.Catalogo.ViewComponents
 {
     public class CarroselViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(IList<Produto> produtos, int indice, int tamanhoPagina)
+        public IViewComponentResult Invoke(IList<Produto> produtosDaCategoria, int indice, int tamanhoDaPagina)
         {
-            var produtosNaPagina = produtos
-                .Skip(indice * tamanhoPagina)
-                .Take(tamanhoPagina)
+            var produtosNaPagina = produtosDaCategoria
+                .Skip(indice * tamanhoDaPagina)
+                .Take(tamanhoDaPagina)
                 .ToList();
 
             return View("Default", new CarroselViewModel(produtosNaPagina, indice));
