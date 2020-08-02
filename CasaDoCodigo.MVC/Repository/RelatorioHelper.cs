@@ -99,9 +99,9 @@ namespace CasaDoCodigo.MVC.Repository
             {
                 string linhaItemPedido = string.Format(
                     templateItemPedido,
-                    i.Produto.Codigo,
+                    i.CodigoProduto,
                     i.PrecoUnitario,
-                    i.Produto.Nome,
+                    i.NomeProduto,
                     i.Quantidade,
                     i.Subtotal
                     );

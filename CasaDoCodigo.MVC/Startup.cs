@@ -155,9 +155,6 @@ namespace CasaDoCodigo.MVC
                     name: "default",
                     template: "{controller=Home}/{action=Index}");
             });
-
-            var dataService = serviceProvider.GetRequiredService<IDataService>();
-            dataService.InicializaDBAsync(serviceProvider).Wait();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CasaDoCodigo.MVC.Areas.Catalogo.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace CasaDoCodigo.MVC.Models
@@ -12,14 +13,19 @@ namespace CasaDoCodigo.MVC.Models
         public Pedido Pedido { get; private set; }
         [Required]
         [DataMember]
-        public Produto Produto { get; private set; }
+        public string CodigoProduto { get; private set; }
+        [Required]
+        [DataMember]
+        public string NomeProduto { get; private set; }
         [Required]
         [DataMember]
         public int Quantidade { get; private set; }
         [Required]
         [DataMember]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal PrecoUnitario { get; private set; }
         [DataMember]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Subtotal => Quantidade * PrecoUnitario;
 
         public ItemPedido()
@@ -27,10 +33,11 @@ namespace CasaDoCodigo.MVC.Models
 
         }
 
-        public ItemPedido(Pedido pedido, Produto produto, int quantidade, decimal precoUnitario)
+        public ItemPedido(Pedido pedido, string codigoProduto, string nomeProduto, int quantidade, decimal precoUnitario)
         {
             Pedido = pedido;
-            Produto = produto;
+            CodigoProduto = codigoProduto;
+            NomeProduto = nomeProduto;
             Quantidade = quantidade;
             PrecoUnitario = precoUnitario;
         }

@@ -17,20 +17,18 @@ namespace CasaDoCodigo.MVC.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Pedido>()
-                .HasKey(t => t.Id);
-            modelBuilder.Entity<Pedido>()
-                .HasMany(t => t.Itens)
-                .WithOne(t => t.Pedido);
-            modelBuilder.Entity<Pedido>()
-                .HasOne(t => t.Cadastro)
-                .WithOne(t => t.Pedido)
-                .IsRequired();
+            modelBuilder.Entity<Pedido>(builderAction =>
+            {
+                builderAction.HasKey(p => p.Id);
+                builderAction.HasMany(p => p.Itens).WithOne(i => i.Pedido);
+                builderAction.HasOne(p => p.Cadastro).WithOne(c => c.Pedido).IsRequired();
+            });
 
-            modelBuilder.Entity<ItemPedido>()
-                .HasKey(t => t.Id);
-            modelBuilder.Entity<ItemPedido>()
-                .HasOne(t => t.Pedido);
+            modelBuilder.Entity<ItemPedido>(builderAction =>
+            {
+                builderAction.HasKey(ip => ip.Id);
+                builderAction.HasOne(ip => ip.Pedido).WithMany(p => p.Itens);
+            });
         }
     }
 }

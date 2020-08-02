@@ -20,6 +20,8 @@
     <Compile Remove="Migrations\SqlServerMigrations\20200802192953_ModeloSemProduto.Designer.cs" />
     <Compile Remove="Migrations\SqlServerMigrations\20200802193105_ModeloSemProduto.cs" />
     <Compile Remove="Migrations\SqlServerMigrations\20200802193105_ModeloSemProduto.Designer.cs" />
+    <Compile Remove="Migrations\SqlServerMigrations\20200802202546_ModeloSemProduto.cs" />
+    <Compile Remove="Migrations\SqlServerMigrations\20200802202546_ModeloSemProduto.Designer.cs" />
   </ItemGroup>
 
 

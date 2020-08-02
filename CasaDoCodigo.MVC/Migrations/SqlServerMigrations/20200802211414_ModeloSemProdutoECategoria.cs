@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
 {
-    public partial class InitialCreateDB : Migration
+    public partial class ModeloSemProdutoECategoria : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                     Email = table.Column<string>(nullable: false),
                     Telefone = table.Column<string>(nullable: false),
                     Endereco = table.Column<string>(nullable: false),
-                    Complemento = table.Column<string>(nullable: false),
+                    Complemento = table.Column<string>(nullable: true),
                     Bairro = table.Column<string>(nullable: false),
                     Municipio = table.Column<string>(nullable: false),
                     UF = table.Column<string>(nullable: false),
@@ -29,25 +29,13 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categoria",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categoria", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Pedido",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CadastroId = table.Column<int>(nullable: false)
+                    CadastroId = table.Column<int>(nullable: false),
+                    ClienteId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,37 +49,16 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produto",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CategoriaId = table.Column<int>(nullable: false),
-                    Codigo = table.Column<string>(nullable: false),
-                    Nome = table.Column<string>(nullable: false),
-                    Preco = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Produto", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Produto_Categoria_CategoriaId",
-                        column: x => x.CategoriaId,
-                        principalTable: "Categoria",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ItemPedido",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PedidoId = table.Column<int>(nullable: false),
-                    ProdutoId = table.Column<int>(nullable: false),
+                    CodigoProduto = table.Column<string>(nullable: false),
+                    NomeProduto = table.Column<string>(nullable: false),
                     Quantidade = table.Column<int>(nullable: false),
-                    PrecoUnitario = table.Column<decimal>(nullable: false)
+                    PrecoUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,12 +69,6 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                         principalTable: "Pedido",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ItemPedido_Produto_ProdutoId",
-                        column: x => x.ProdutoId,
-                        principalTable: "Produto",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -116,20 +77,10 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                 column: "PedidoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemPedido_ProdutoId",
-                table: "ItemPedido",
-                column: "ProdutoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Pedido_CadastroId",
                 table: "Pedido",
                 column: "CadastroId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Produto_CategoriaId",
-                table: "Produto",
-                column: "CategoriaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -141,13 +92,7 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                 name: "Pedido");
 
             migrationBuilder.DropTable(
-                name: "Produto");
-
-            migrationBuilder.DropTable(
                 name: "Cadastro");
-
-            migrationBuilder.DropTable(
-                name: "Categoria");
         }
     }
 }

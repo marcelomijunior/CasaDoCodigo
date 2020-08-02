@@ -3,16 +3,14 @@ using CasaDoCodigo.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200719182734_Pedido_ClienteId")]
-    partial class Pedido_ClienteId
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +18,7 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Cadastro", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Cadastro", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,31 +56,22 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                     b.ToTable("Cadastro");
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Categoria", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.ItemPedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("CodigoProduto")
                         .IsRequired();
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Categoria");
-                });
-
-            modelBuilder.Entity("CasaDoCodigo.Models.ItemPedido", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("NomeProduto")
+                        .IsRequired();
 
                     b.Property<int>("PedidoId");
 
-                    b.Property<decimal>("PrecoUnitario");
-
-                    b.Property<int>("ProdutoId");
+                    b.Property<decimal>("PrecoUnitario")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantidade");
 
@@ -90,12 +79,10 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
 
                     b.HasIndex("PedidoId");
 
-                    b.HasIndex("ProdutoId");
-
                     b.ToTable("ItemPedido");
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Pedido", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Pedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,55 +101,19 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                     b.ToTable("Pedido");
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Produto", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.ItemPedido", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoriaId");
-
-                    b.Property<string>("Codigo")
-                        .IsRequired();
-
-                    b.Property<string>("Nome")
-                        .IsRequired();
-
-                    b.Property<decimal>("Preco");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoriaId");
-
-                    b.ToTable("Produto");
-                });
-
-            modelBuilder.Entity("CasaDoCodigo.Models.ItemPedido", b =>
-                {
-                    b.HasOne("CasaDoCodigo.Models.Pedido", "Pedido")
+                    b.HasOne("CasaDoCodigo.MVC.Models.Pedido", "Pedido")
                         .WithMany("Itens")
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CasaDoCodigo.Models.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Pedido", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Pedido", b =>
                 {
-                    b.HasOne("CasaDoCodigo.Models.Cadastro", "Cadastro")
+                    b.HasOne("CasaDoCodigo.MVC.Models.Cadastro", "Cadastro")
                         .WithOne("Pedido")
-                        .HasForeignKey("CasaDoCodigo.Models.Pedido", "CadastroId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CasaDoCodigo.Models.Produto", b =>
-                {
-                    b.HasOne("CasaDoCodigo.Models.Categoria", "Categoria")
-                        .WithMany()
-                        .HasForeignKey("CategoriaId")
+                        .HasForeignKey("CasaDoCodigo.MVC.Models.Pedido", "CadastroId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
