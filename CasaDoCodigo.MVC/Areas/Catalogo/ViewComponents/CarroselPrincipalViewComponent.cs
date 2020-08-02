@@ -1,10 +1,9 @@
-﻿using CasaDoCodigo.MVC.Areas.Catalogo.Models.ViewModels;
-using CasaDoCodigo.MVC.Models;
+﻿using CasaDoCodigo.MVC.Areas.Catalogo.Models;
+using CasaDoCodigo.MVC.Areas.Catalogo.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CasaDoCodigo.MVC.Areas.Catalogo.ViewComponents
 {

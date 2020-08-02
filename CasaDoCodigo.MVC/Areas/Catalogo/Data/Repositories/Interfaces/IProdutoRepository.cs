@@ -1,16 +1,15 @@
-﻿using CasaDoCodigo.MVC.Models;
-using CasaDoCodigo.MVC.Models.ViewsModel;
-using System;
+﻿using CasaDoCodigo.MVC.Areas.Catalogo.Models;
+using CasaDoCodigo.MVC.Areas.Catalogo.Models.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.MVC.Repository.Interfaces
+namespace CasaDoCodigo.MVC.Areas.Catalogo.Data.Repositories.Interfaces
 {
     public interface IProdutoRepository
     {
         Task SaveProdutosAsync(List<Livro> livros);
         Task<IList<Produto>> GetProdutosAsync();
+        Task<Produto> GetProdutoAsync(string codigo);
         Task<CatalogoViewModel> GetProdutosAsync(string pesquisa);
     }
 }

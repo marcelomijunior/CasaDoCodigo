@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CasaDoCodigo.MVC.Areas.Catalogo.Models;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
 
 namespace CasaDoCodigo.MVC.Models
 {

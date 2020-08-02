@@ -1,7 +1,5 @@
-﻿using CasaDoCodigo.MVC.Models;
-using CasaDoCodigo.MVC.Repository;
-using CasaDoCodigo.MVC.Repository.Interfaces;
-using Microsoft.AspNetCore.Hosting;
+﻿using CasaDoCodigo.MVC.Areas.Catalogo.Data.Repositories.Interfaces;
+using CasaDoCodigo.MVC.Areas.Catalogo.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;

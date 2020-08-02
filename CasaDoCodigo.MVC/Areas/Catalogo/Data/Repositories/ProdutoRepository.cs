@@ -1,20 +1,28 @@
-﻿using CasaDoCodigo.MVC.Data;
-using CasaDoCodigo.MVC.Models;
-using CasaDoCodigo.MVC.Models.ViewsModel;
-using CasaDoCodigo.MVC.Repository.Interfaces;
+﻿using CasaDoCodigo.MVC.Areas.Catalogo.Data.Repositories.Interfaces;
+using CasaDoCodigo.MVC.Areas.Catalogo.Models;
+using CasaDoCodigo.MVC.Areas.Catalogo.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.MVC.Repository
+namespace CasaDoCodigo.MVC.Areas.Catalogo.Data.Repositories
 {
     public class ProdutoRepository : BaseRepository<Produto>, IProdutoRepository
     {
-        public ProdutoRepository(IConfiguration configuration, ApplicationDbContext contexto) : base(configuration, contexto)
+        static IList<Produto> listaProdutos;
+
+        public ProdutoRepository(IConfiguration configuration, CatalogoDbContext contexto) : base(configuration, contexto)
         {
+        }
+
+        public async Task<Produto> GetProdutoAsync(string codigo)
+        {
+            return await dbSet
+                .Where(p => p.Codigo == codigo)
+                .Include(prod => prod.Categoria)
+                .SingleOrDefaultAsync();
         }
 
         public async Task<IList<Produto>> GetProdutosAsync()
@@ -26,17 +34,25 @@ namespace CasaDoCodigo.MVC.Repository
 
         public async Task<CatalogoViewModel> GetProdutosAsync(string pesquisa)
         {
-            IQueryable<Produto> query = dbSet;
+            if (listaProdutos == null)
+            {
+                listaProdutos =
+                    await dbSet
+                        .Include(prod => prod.Categoria)
+                        .ToListAsync();
+            }
+
+            var resultado = listaProdutos;
 
             if (!string.IsNullOrEmpty(pesquisa))
             {
-                query = query.Where(q => q.Nome.Contains(pesquisa));
+                pesquisa = pesquisa.ToLower();
+                resultado = listaProdutos
+                    .Where(q => q.Nome.ToLower().Contains(pesquisa) || q.Categoria.Nome.ToLower().Contains(pesquisa))
+                    .ToList();
             }
 
-            query = query
-                .Include(prod => prod.Categoria);
-
-            return new CatalogoViewModel(await query.ToListAsync(), pesquisa);
+            return new CatalogoViewModel(resultado, pesquisa);
         }
 
         //MELHORIA: 1) Métodos assíncronos
@@ -49,7 +65,7 @@ namespace CasaDoCodigo.MVC.Repository
             foreach (var livro in livros)
             {
                 var categoria =
-                    await contexto.Set<Categoria>()
+                    await catalogoDbContext.Set<Categoria>()
                         .SingleAsync(c => c.Nome == livro.Categoria);
 
                 if (!await dbSet.Where(p => p.Codigo == livro.Codigo).AnyAsync())
@@ -57,7 +73,7 @@ namespace CasaDoCodigo.MVC.Repository
                     await dbSet.AddAsync(new Produto(livro.Codigo, livro.Nome, livro.Preco, categoria));
                 }
             }
-            await contexto.SaveChangesAsync();
+            await catalogoDbContext.SaveChangesAsync();
         }
 
         private async Task SaveCategorias(List<Livro> livros)
@@ -71,15 +87,15 @@ namespace CasaDoCodigo.MVC.Repository
             foreach (var nomeCategoria in categorias)
             {
                 var categoriaDB =
-                    await contexto.Set<Categoria>()
+                    await catalogoDbContext.Set<Categoria>()
                     .SingleOrDefaultAsync(c => c.Nome == nomeCategoria);
                 if (categoriaDB == null)
                 {
-                    await contexto.Set<Categoria>()
+                    await catalogoDbContext.Set<Categoria>()
                         .AddAsync(new Categoria(nomeCategoria));
                 }
             }
-            await contexto.SaveChangesAsync();
+            await catalogoDbContext.SaveChangesAsync();
         }
     }
 }

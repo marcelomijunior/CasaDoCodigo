@@ -1,13 +1,9 @@
-﻿using CasaDoCodigo.MVC.Models;
-using CasaDoCodigo.MVC.Repository;
+﻿using CasaDoCodigo.MVC.Areas.Catalogo.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CasaDoCodigo.MVC.Areas.Catalogo.Data
 {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using CasaDoCodigo.MVC.Areas.Catalogo.Data;
+using CasaDoCodigo.MVC.Areas.Catalogo.Data.Repositories;
+using CasaDoCodigo.MVC.Areas.Catalogo.Data.Repositories.Interfaces;
 using CasaDoCodigo.MVC.Data;
 using CasaDoCodigo.MVC.Repository;
 using CasaDoCodigo.MVC.Repository.Interfaces;

@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.MVC.Areas.Identity.Data;
+﻿using CasaDoCodigo.MVC.Areas.Catalogo.Models;
+using CasaDoCodigo.MVC.Areas.Identity.Data;
 using CasaDoCodigo.MVC.Data;
 using CasaDoCodigo.MVC.Models;
 using CasaDoCodigo.MVC.Models.ViewsModel;
@@ -8,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.MVC.Models
+namespace CasaDoCodigo.MVC.Areas.Catalogo.Models
 {
     public class Produto : BaseModel
     {
@@ -21,6 +22,7 @@ namespace CasaDoCodigo.MVC.Models
         [Required]
         public string Nome { get; private set; }
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Preco { get; private set; }
 
         public Produto(string codigo, string nome, decimal preco, Categoria categoria)

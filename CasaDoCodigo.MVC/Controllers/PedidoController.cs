@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CasaDoCodigo.MVC.Areas.Catalogo.Data.Repositories.Interfaces;
 using CasaDoCodigo.MVC.Areas.Identity.Data;
 using CasaDoCodigo.MVC.Models;
 using CasaDoCodigo.MVC.Models.ViewsModel;

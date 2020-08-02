@@ -16,6 +16,10 @@
     <Compile Remove="Migrations\20200715143621_reset db.Designer.cs" />
     <Compile Remove="Migrations\20200715143741_InitialCreate.cs" />
     <Compile Remove="Migrations\20200715143741_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\SqlServerMigrations\20200802192953_ModeloSemProduto.cs" />
+    <Compile Remove="Migrations\SqlServerMigrations\20200802192953_ModeloSemProduto.Designer.cs" />
+    <Compile Remove="Migrations\SqlServerMigrations\20200802193105_ModeloSemProduto.cs" />
+    <Compile Remove="Migrations\SqlServerMigrations\20200802193105_ModeloSemProduto.Designer.cs" />
   </ItemGroup>
 
 

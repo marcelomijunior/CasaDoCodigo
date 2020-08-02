@@ -18,7 +18,7 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Cadastro", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Cadastro", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,7 +56,7 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                     b.ToTable("Cadastro");
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Categoria", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Categoria", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +70,7 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                     b.ToTable("Categoria");
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.ItemPedido", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.ItemPedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,7 +93,7 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                     b.ToTable("ItemPedido");
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Pedido", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Pedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                     b.ToTable("Pedido");
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Produto", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Produto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,30 +135,30 @@ namespace CasaDoCodigo.MVC.Migrations.SqlServerMigrations
                     b.ToTable("Produto");
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.ItemPedido", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.ItemPedido", b =>
                 {
-                    b.HasOne("CasaDoCodigo.Models.Pedido", "Pedido")
+                    b.HasOne("CasaDoCodigo.MVC.Models.Pedido", "Pedido")
                         .WithMany("Itens")
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CasaDoCodigo.Models.Produto", "Produto")
+                    b.HasOne("CasaDoCodigo.MVC.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Pedido", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Pedido", b =>
                 {
-                    b.HasOne("CasaDoCodigo.Models.Cadastro", "Cadastro")
+                    b.HasOne("CasaDoCodigo.MVC.Models.Cadastro", "Cadastro")
                         .WithOne("Pedido")
-                        .HasForeignKey("CasaDoCodigo.Models.Pedido", "CadastroId")
+                        .HasForeignKey("CasaDoCodigo.MVC.Models.Pedido", "CadastroId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CasaDoCodigo.Models.Produto", b =>
+            modelBuilder.Entity("CasaDoCodigo.MVC.Models.Produto", b =>
                 {
-                    b.HasOne("CasaDoCodigo.Models.Categoria", "Categoria")
+                    b.HasOne("CasaDoCodigo.MVC.Models.Categoria", "Categoria")
                         .WithMany()
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade);

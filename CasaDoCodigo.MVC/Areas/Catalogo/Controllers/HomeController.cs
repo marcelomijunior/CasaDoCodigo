@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CasaDoCodigo.MVC.Repository.Interfaces;
+﻿using System.Threading.Tasks;
+using CasaDoCodigo.MVC.Areas.Catalogo.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CasaDoCodigo.MVC.Areas.Catalogo.Controllers
