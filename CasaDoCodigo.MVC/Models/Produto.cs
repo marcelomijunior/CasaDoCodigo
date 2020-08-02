@@ -13,6 +13,7 @@ namespace CasaDoCodigo.MVC.Models
 
         }
 
+        public int CategoriaId { get; set; }
         [Required]
         public Categoria Categoria { get; private set; }
         [Required]

@@ -1,4 +1,5 @@
 ﻿using CasaDoCodigo.MVC.Areas.Identity.Data;
+using CasaDoCodigo.MVC.Data;
 using CasaDoCodigo.MVC.Models;
 using CasaDoCodigo.MVC.Models.ViewsModel;
 using CasaDoCodigo.MVC.Repository.Interfaces;
@@ -23,7 +24,7 @@ namespace CasaDoCodigo.MVC.Repository
 
         public PedidoRepository(
             IConfiguration configuration,
-            ApplicationContext contexto,
+            ApplicationDbContext contexto,
             IHttpContextAccessor contextAccessor,
             IHttpHelper sessionHelper,
             ICadastroRepository cadastroRepository,

@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.MVC
+namespace CasaDoCodigo.MVC.Data
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationContext(DbContextOptions options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
@@ -18,10 +18,10 @@ namespace CasaDoCodigo.MVC
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Categoria>()
-                .HasKey(t => t.Id);
+                .HasKey(c => c.Id);
 
             modelBuilder.Entity<Produto>()
-                .HasKey(t => t.Id);
+                .HasKey(p => p.Id);
 
             modelBuilder.Entity<Pedido>()
                 .HasKey(t => t.Id);

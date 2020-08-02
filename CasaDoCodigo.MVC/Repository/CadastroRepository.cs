@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.MVC.Models;
+﻿using CasaDoCodigo.MVC.Data;
+using CasaDoCodigo.MVC.Models;
 using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -11,7 +12,7 @@ namespace CasaDoCodigo.MVC.Repository
     public class CadastroRepository : BaseRepository<Cadastro>, ICadastroRepository
     {
         public CadastroRepository(IConfiguration configuration,
-            ApplicationContext contexto) : base(configuration, contexto)
+            ApplicationDbContext contexto) : base(configuration, contexto)
         {
 
         }

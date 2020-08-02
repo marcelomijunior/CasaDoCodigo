@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using CasaDoCodigo.MVC.Areas.Catalogo.Data;
+using CasaDoCodigo.MVC.Data;
 using CasaDoCodigo.MVC.Repository;
 using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -33,12 +35,58 @@ namespace CasaDoCodigo.MVC
             services.AddDistributedMemoryCache();
             services.AddSession();
 
-            string connectionString = Configuration.GetConnectionString("Default");
+            ConfigureDbContext<ApplicationDbContext>(services, "Default");
+            ConfigureDbContext<CatalogoDbContext>(services, "Catalogo");
 
-            services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(connectionString)
-            );
+            ConfigureDirectoryServices(services);
 
+            ExternalAuthentications(services);
+            //ConfigureIdentityServer4(services);
+        }
+
+        private void ConfigureIdentityServer4(IServiceCollection services)
+        {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services.AddAuthentication(options =>
+            {
+                // forma de autenticação local
+                options.DefaultScheme = "Cookies";
+                // protocolo que define o fluxo da autenticação
+                options.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie()
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.SignInScheme = "Cookies";
+                    options.Authority = Configuration["CasaDoCodigo.IdentityServer4Url"];
+                    options.RequireHttpsMetadata = false;
+
+                    options.ClientId = "CasaDoCodigo.MVC";
+                    options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
+                    options.ResponseType = "code id_token";
+
+                    options.SaveTokens = true;
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                });
+        }
+
+        private void ExternalAuthentications(IServiceCollection services)
+        {
+            services.AddAuthentication()
+                            .AddMicrosoftAccount(options =>
+                            {
+                                options.ClientId = Configuration["externallogin:microsoft:clientid"];
+                                options.ClientSecret = Configuration["externallogin:microsoft:clientsecret"];
+                            }).AddGoogle(options =>
+                            {
+                                options.ClientId = Configuration["externallogin:google:clientid"];
+                                options.ClientSecret = Configuration["externallogin:google:clientsecret"];
+                            });
+        }
+
+        private static void ConfigureDirectoryServices(IServiceCollection services)
+        {
             services.AddTransient<IDataService, DataService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IHttpHelper, HttpHelper>();
@@ -48,41 +96,15 @@ namespace CasaDoCodigo.MVC
             services.AddTransient<IRelatorioHelper, RelatorioHelper>();
 
             services.AddHttpClient<IRelatorioHelper, RelatorioHelper>();
+        }
 
-            services.AddAuthentication()
-                .AddMicrosoftAccount(options =>
-                {
-                    options.ClientId = Configuration["externallogin:microsoft:clientid"];
-                    options.ClientSecret = Configuration["externallogin:microsoft:clientsecret"];
-                }).AddGoogle(options =>
-                {
-                    options.ClientId = Configuration["externallogin:google:clientid"];
-                    options.ClientSecret = Configuration["externallogin:google:clientsecret"];
-                });
+        private void ConfigureDbContext<T>(IServiceCollection services, string connectinoName) where T : DbContext
+        {
+            string connectionString = Configuration.GetConnectionString(connectinoName);
 
-            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
-            //services.AddAuthentication(options =>
-            //{
-            //    // forma de autenticação local
-            //    options.DefaultScheme = "Cookies";
-            //    // protocolo que define o fluxo da autenticação
-            //    options.DefaultChallengeScheme = "oidc";
-            //})
-            //    .AddCookie()
-            //    .AddOpenIdConnect("oidc", options =>
-            //    {
-            //        options.SignInScheme = "Cookies";
-            //        options.Authority = Configuration["CasaDoCodigo.IdentityServer4Url"];
-            //        options.RequireHttpsMetadata = false;
-
-            //        options.ClientId = "CasaDoCodigo.MVC";
-            //        options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
-            //        options.ResponseType = "code id_token";
-
-            //        options.SaveTokens = true;
-            //        options.GetClaimsFromUserInfoEndpoint = true;
-            //    });
+            services.AddDbContext<T>(options =>
+                options.UseSqlServer(connectionString)
+            );
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,

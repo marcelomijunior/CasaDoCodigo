@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.MVC.Models;
+﻿using CasaDoCodigo.MVC.Data;
+using CasaDoCodigo.MVC.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -11,11 +12,11 @@ namespace CasaDoCodigo.MVC.Repository
     public class BaseRepository<T> where T : BaseModel
     {
         protected readonly IConfiguration configuration;
-        protected readonly ApplicationContext contexto;
+        protected readonly ApplicationDbContext contexto;
         protected readonly DbSet<T> dbSet;
 
         public BaseRepository(IConfiguration configuration,
-            ApplicationContext contexto)
+            ApplicationDbContext contexto)
         {
             this.configuration = configuration;
             this.contexto = contexto;

@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.MVC.Models;
+﻿using CasaDoCodigo.MVC.Data;
+using CasaDoCodigo.MVC.Models;
 using CasaDoCodigo.MVC.Models.ViewsModel;
 using CasaDoCodigo.MVC.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ namespace CasaDoCodigo.MVC.Repository
 {
     public class ProdutoRepository : BaseRepository<Produto>, IProdutoRepository
     {
-        public ProdutoRepository(IConfiguration configuration, ApplicationContext contexto) : base(configuration, contexto)
+        public ProdutoRepository(IConfiguration configuration, ApplicationDbContext contexto) : base(configuration, contexto)
         {
         }
 
@@ -80,14 +81,5 @@ namespace CasaDoCodigo.MVC.Repository
             }
             await contexto.SaveChangesAsync();
         }
-    }
-
-    public class Livro
-    {
-        public string Codigo { get; set; }
-        public string Nome { get; set; }
-        public string Categoria { get; set; }
-        public string Subcategoria { get; set; }
-        public decimal Preco { get; set; }
     }
 }

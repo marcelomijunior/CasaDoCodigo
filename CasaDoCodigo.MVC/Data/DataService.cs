@@ -10,13 +10,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace CasaDoCodigo.MVC
+namespace CasaDoCodigo.MVC.Data
 {
+    public interface IDataService
+    {
+        Task InicializaDBAsync(IServiceProvider provider);
+    }
+
     public class DataService : IDataService
     {
         public async Task InicializaDBAsync(IServiceProvider provider)
         {
-            var contexto = provider.GetService<ApplicationContext>();
+            var contexto = provider.GetService<ApplicationDbContext>();
 
             await contexto.Database.MigrateAsync();
 
@@ -33,7 +38,7 @@ namespace CasaDoCodigo.MVC
 
         private async Task<List<Livro>> GetLivrosAsync()
         {
-            var json = await File.ReadAllTextAsync("Livros.json");
+            var json = await File.ReadAllTextAsync("Data/Livros.json");
             return JsonConvert.DeserializeObject<List<Livro>>(json);
         }
     }
