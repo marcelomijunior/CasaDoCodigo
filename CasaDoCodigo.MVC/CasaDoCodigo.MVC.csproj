@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AssemblyName>CasaDoCodigo.MVC</AssemblyName>
+    <UserSecretsId>793f16ef-05f2-46b2-b672-0e71962597a3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
